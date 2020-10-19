@@ -40,10 +40,13 @@ public class RP2021A {
                 System.out.println("c1: "+patrones.get(x).getVectorC()[y]);
             }
         }
-        Patron p1 = new Patron("","",new double[]{2,2,2,2},1);
+        Patron p1 = new Patron("","",new double[]{2.4,3.3,5.6,7.8},1);
         mn.clasificar(patrones, p1);
         System.out.println(patrones.size());
         System.out.println("Pertenece a la clase: "+p1.getClase());
+         System.out.println(patrones.get(0).calcularDistancia(p1));
+         System.out.println(patrones.get(1).calcularDistancia(p1));
+         System.out.println(patrones.get(2).calcularDistancia(p1));
         /*Patron p1 = new Patron("","",new double[]{2.4,3.3,5.6,7.8},1);
         System.out.println("Los resultados de las distancias con el primer punto son: ");
         for(int x = 0; x < patrones.size(); x++){

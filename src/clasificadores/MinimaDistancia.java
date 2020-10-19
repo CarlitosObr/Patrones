@@ -61,12 +61,14 @@ public class MinimaDistancia implements ClasificadorSupervisado{
     public void clasificar(ArrayList<Patron> instancias, Patron comp) {
        // clasificar las instancias
        double menor = instancias.get(0).calcularDistancia(comp);
-       for(int k = 1; k<representativos.size(); k++){
+       int n = 0;
+       for(int k = 1; k<instancias.size(); k++){
             double numeroActual =  instancias.get(k).calcularDistancia(comp);
             if (numeroActual < menor) {
             menor = numeroActual;
-            comp.setClase(instancias.get(k).getClase());
+            n = k;
             }
         }
+       comp.setClase(instancias.get(n).getClase());
     }
 }
