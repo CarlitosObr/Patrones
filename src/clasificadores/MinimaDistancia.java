@@ -37,7 +37,7 @@ public class MinimaDistancia implements ClasificadorSupervisado{
                 for(int j = 0; j<vector.length; j++){
                     vector[j] = vector[j]/prom; 
                 }
-                //instancias.add(new Patron(vector,instancias.get(x).getClase()));
+                instancias.add(new Patron(vector,instancias.get(x).getClase()));
                 //instancias = representativos;
                 representativos.add(new Patron(vector,instancias.get(x).getClase()));
                 vector = new double[instancias.get(x).getVectorC().length];
@@ -48,11 +48,9 @@ public class MinimaDistancia implements ClasificadorSupervisado{
                 vector[y]+=instancias.get(x).getVectorC()[y];
                 }
             }   
-            
-            //instancias = representativos;
         }
         
-       instancias.clear();
+        instancias.clear();
             for(int i = 0; i<representativos.size(); i++){
                 instancias.add(representativos.get(i));
             }
@@ -60,11 +58,15 @@ public class MinimaDistancia implements ClasificadorSupervisado{
     }
 
     @Override
-    public void clasificar(ArrayList<Patron> instancias) {
+    public void clasificar(ArrayList<Patron> instancias, Patron comp) {
        // clasificar las instancias
-      
-       /*for(int k =){
-           
-       }*/
+       double menor = instancias.get(0).calcularDistancia(comp);
+       for(int k = 1; k<representativos.size(); k++){
+            double numeroActual =  instancias.get(k).calcularDistancia(comp);
+            if (numeroActual < menor) {
+            menor = numeroActual;
+            comp.setClase(instancias.get(k).getClase());
+            }
+        }
     }
 }

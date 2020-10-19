@@ -39,8 +39,11 @@ public class RP2021A {
             for(int y= 0; y<patrones.get(x).getVectorC().length;y++){
                 System.out.println("c1: "+patrones.get(x).getVectorC()[y]);
             }
-            
         }
+        Patron p1 = new Patron("","",new double[]{2,2,2,2},1);
+        mn.clasificar(patrones, p1);
+        System.out.println(patrones.size());
+        System.out.println("Pertenece a la clase: "+p1.getClase());
         /*Patron p1 = new Patron("","",new double[]{2.4,3.3,5.6,7.8},1);
         System.out.println("Los resultados de las distancias con el primer punto son: ");
         for(int x = 0; x < patrones.size(); x++){
