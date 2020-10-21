@@ -36,11 +36,10 @@ public class RP2021A {
         mn.entrenar(patrones);
         System.out.println(patrones.size());
         for(int x = 0; x < patrones.size(); x++){
-            for(int y= 0; y<patrones.get(x).getVectorC().length;y++){
-                System.out.println("c1: "+patrones.get(x).getVectorC()[y]);
-            }
+             System.out.println(patrones.get(x).getClase());
+         
         }
-        Patron p1 = new Patron("","",new double[]{2.4,3.3,5.6,7.8},1);
+        Patron p1 = new Patron("","",new double[]{2.8,2.6,2.3,2.2},1);
         mn.clasificar(patrones, p1);
         System.out.println(patrones.size());
         System.out.println("Pertenece a la clase: "+p1.getClase());

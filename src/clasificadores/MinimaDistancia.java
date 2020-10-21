@@ -37,9 +37,9 @@ public class MinimaDistancia implements ClasificadorSupervisado{
                 for(int j = 0; j<vector.length; j++){
                     vector[j] = vector[j]/prom; 
                 }
-                instancias.add(new Patron(vector,instancias.get(x).getClase()));
+                instancias.add(new Patron(vector,instancias.get(x-1).getClase()));
                 //instancias = representativos;
-                representativos.add(new Patron(vector,instancias.get(x).getClase()));
+                representativos.add(new Patron(vector,instancias.get(x-1).getClase()));
                 vector = new double[instancias.get(x).getVectorC().length];
                 prom = 0;
             }else{
