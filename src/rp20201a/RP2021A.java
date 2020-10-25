@@ -30,16 +30,24 @@ public class RP2021A {
         * 5.1,3.5,1.4,0.2
         **/ 
         ArrayList<Patron> patrones = LeerDatos.tokenizarDataSet();
+        ArrayList<Patron> representativos = new ArrayList(); 
         System.out.println(patrones.size());
         MinimaDistancia mn = new MinimaDistancia();
         
         mn.entrenar(patrones);
-        System.out.println(patrones.size());
-        for(int x = 0; x < patrones.size(); x++){
-             System.out.println(patrones.get(x).getClase());
-         
+        System.out.println(mn.representativos.size());
+        System.out.println(patrones.size()-mn.representativos.size());
+        for(int x = 0; x < patrones.size() - mn.representativos.size(); x++){
+             mn.clasificar(patrones, patrones.get(x));
         }
-        Patron p1 = new Patron("","",new double[]{2.8,2.6,2.3,2.2},1);
+        for(int x = 0; x < patrones.size() - mn.representativos.size(); x++){
+             System.out.println("Clase: "+patrones.get(x).getClase()+" Clase resultante: "+patrones.get(x).getClaseResultante());
+        }
+        System.out.println("La eficacia con la que se clasifica es de "+mn.calculaEficacia(patrones));
+        /*for(int x = 0; x < patrones.size(); x++){
+             System.out.println(patrones.get(x).getClase());
+        }*/
+        /*Patron p1 = new Patron("","",new double[]{2,2,2,2},1);
         mn.clasificar(patrones, p1);
         System.out.println(patrones.size());
         System.out.println("Pertenece a la clase: "+p1.getClase());

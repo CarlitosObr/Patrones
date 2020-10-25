@@ -12,8 +12,8 @@ import java.util.ArrayList;
  * @author carli
  */
 public class MinimaDistancia implements ClasificadorSupervisado{
-     ArrayList<Patron> representativos;
-
+     public ArrayList<Patron> representativos;
+     
     public MinimaDistancia() {
         this.representativos = new ArrayList<>();
     }
@@ -50,25 +50,39 @@ public class MinimaDistancia implements ClasificadorSupervisado{
             }   
         }
         
-        instancias.clear();
+        /*instancias.clear();
             for(int i = 0; i<representativos.size(); i++){
                 instancias.add(representativos.get(i));
-            }
+            }*/
         //instancias.add(representativos);  
     }
 
     @Override
     public void clasificar(ArrayList<Patron> instancias, Patron comp) {
        // clasificar las instancias
-       double menor = instancias.get(0).calcularDistancia(comp);
+       double menor = representativos.get(0).calcularDistancia(comp);
        int n = 0;
-       for(int k = 1; k<instancias.size(); k++){
-            double numeroActual =  instancias.get(k).calcularDistancia(comp);
+       for(int k = 1; k<representativos.size(); k++){
+            double numeroActual =  representativos.get(k).calcularDistancia(comp);
             if (numeroActual < menor) {
             menor = numeroActual;
             n = k;
             }
         }
-       comp.setClase(instancias.get(n).getClase());
+       comp.setClaseResultante(representativos.get(n).getClase());
+    }
+
+    @Override
+    public double calculaEficacia(ArrayList<Patron> instancias) {
+        double n=0;
+        double elementos = 0;
+        double eficacia=0;
+        for(int x=0; x<instancias.size();x++){
+            if(instancias.get(x).getClase().equals(instancias.get(x).getClaseResultante())){
+               n+=1; 
+            }
+        }
+        eficacia = (100*n)/(instancias.size()-representativos.size());
+        return eficacia;
     }
 }
