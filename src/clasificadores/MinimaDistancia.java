@@ -50,11 +50,7 @@ public class MinimaDistancia implements ClasificadorSupervisado{
             }   
         }
         
-        /*instancias.clear();
-            for(int i = 0; i<representativos.size(); i++){
-                instancias.add(representativos.get(i));
-            }*/
-        //instancias.add(representativos);  
+        
     }
 
     @Override

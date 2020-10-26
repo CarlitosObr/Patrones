@@ -65,7 +65,6 @@ public class RP2021A {
             System.out.println(x+1+": "+patrones.get(x).calcularDistancia(p2));
         }*/
         // TODO: TOKENIZADOR PARA PODER SEPARAR POR COMAS Y GENERAR UN COLECCION DE PATRONES
-        
     }
     
 }

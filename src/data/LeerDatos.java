@@ -88,5 +88,4 @@ public class LeerDatos {
         return patrones;
     }
     
-    
 }
