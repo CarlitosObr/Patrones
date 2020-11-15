@@ -69,9 +69,9 @@ public class LeerDatos {
                         clase = lista2.get(lista2.size()-1);
                         if(!clase.equals(claseComp)){
                            n++;
-                           patrones.add(new Patron(clase,""+n,vector,n));
+                           patrones.add(new Patron(clase,"",vector,n));
                         }else{
-                           patrones.add(new Patron(clase,""+n,vector,n));
+                           patrones.add(new Patron(clase,"",vector,n));
                         }
                      
                     lista2.clear();

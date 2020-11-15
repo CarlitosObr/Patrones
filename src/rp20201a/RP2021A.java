@@ -11,6 +11,7 @@ import data.Patron;
 import data.LeerDatos;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  *
@@ -31,9 +32,7 @@ public class RP2021A {
         * 5.1,3.5,1.4,0.2
         **/ 
         ArrayList<Patron> patrones = LeerDatos.tokenizarDataSet();
-        ArrayList<Patron> prueba1 = new ArrayList(); 
-        Patron p1 = new Patron(new double[]{20.8,4,0,0},"");
-        prueba1.add(p1);
+       
         System.out.println(patrones.size());
         MinimaDistancia mn = new MinimaDistancia();
         KNN knn = new KNN(5);
@@ -49,12 +48,15 @@ public class RP2021A {
         System.out.println("La eficacia con la que se clasifica es de "+mn.calculaEficiencia(patrones));*/
         
         //for(int x = 0; x < patrones.size(); x++){
-             knn.clasificar(patrones, patrones.get(72));
-        
-        for(int x = 0; x < patrones.size() - mn.representativos.size(); x++){
-             System.out.println("Indice: "+x+" Clase: "+patrones.get(x).getClase()+" Distancia: "+patrones.get(x).getDistancia());
+             
+        for(int x = 0; x < patrones.size(); x++){
+              knn.clasificar(patrones, patrones.get(x));
         }
-        
+      
+        for(int x = 0; x < patrones.size(); x++){
+             System.out.println("Indice: "+x+" Clase: "+patrones.get(x).getClase()+" ClaseResultante: "+patrones.get(x).getClaseResultante());
+        }
+        System.out.println("La eficiencia con la que se clasifica es de "+knn.calculaEficiencia(patrones));
         
         /*for(int x = 0; x < patrones.size(); x++){
              System.out.println(patrones.get(x).getClase());
