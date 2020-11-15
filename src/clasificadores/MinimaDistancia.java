@@ -69,7 +69,7 @@ public class MinimaDistancia implements ClasificadorSupervisado{
     }
 
     @Override
-    public double calculaEficacia(ArrayList<Patron> instancias) {
+    public double calculaEficiencia(ArrayList<Patron> instancias) {
         double n=0;
         double elementos = 0;
         double eficacia=0;
@@ -78,6 +78,8 @@ public class MinimaDistancia implements ClasificadorSupervisado{
                n+=1; 
             }
         }
+        System.out.println("Correctos: "+n);
+        System.out.println("Incorrectos: "+(instancias.size()-n-representativos.size()));
         eficacia = (100*n)/(instancias.size()-representativos.size());
         return eficacia;
     }

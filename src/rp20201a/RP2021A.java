@@ -5,6 +5,7 @@
  */
 package rp20201a;
 
+import clasificadores.KNN;
 import clasificadores.MinimaDistancia;
 import data.Patron;
 import data.LeerDatos;
@@ -30,20 +31,31 @@ public class RP2021A {
         * 5.1,3.5,1.4,0.2
         **/ 
         ArrayList<Patron> patrones = LeerDatos.tokenizarDataSet();
-        ArrayList<Patron> representativos = new ArrayList(); 
+        ArrayList<Patron> prueba1 = new ArrayList(); 
+        Patron p1 = new Patron(new double[]{20.8,4,0,0},"");
+        prueba1.add(p1);
         System.out.println(patrones.size());
         MinimaDistancia mn = new MinimaDistancia();
-        
-        mn.entrenar(patrones);
-        System.out.println(mn.representativos.size());
-        System.out.println(patrones.size()-mn.representativos.size());
-        for(int x = 0; x < patrones.size() - mn.representativos.size(); x++){
+        KNN knn = new KNN(5);
+        knn.entrenar(patrones);
+        //System.out.println(mn.representativos.size());
+        //System.out.println(patrones.size()-mn.representativos.size());
+        /*for(int x = 0; x < patrones.size() - mn.representativos.size(); x++){
              mn.clasificar(patrones, patrones.get(x));
         }
         for(int x = 0; x < patrones.size() - mn.representativos.size(); x++){
              System.out.println("Clase: "+patrones.get(x).getClase()+" Clase resultante: "+patrones.get(x).getClaseResultante());
         }
-        System.out.println("La eficacia con la que se clasifica es de "+mn.calculaEficacia(patrones));
+        System.out.println("La eficacia con la que se clasifica es de "+mn.calculaEficiencia(patrones));*/
+        
+        //for(int x = 0; x < patrones.size(); x++){
+             knn.clasificar(patrones, patrones.get(72));
+        
+        for(int x = 0; x < patrones.size() - mn.representativos.size(); x++){
+             System.out.println("Indice: "+x+" Clase: "+patrones.get(x).getClase()+" Distancia: "+patrones.get(x).getDistancia());
+        }
+        
+        
         /*for(int x = 0; x < patrones.size(); x++){
              System.out.println(patrones.get(x).getClase());
         }*/

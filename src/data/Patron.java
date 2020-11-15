@@ -15,6 +15,7 @@ public class Patron {
     private String claseResultante;
     private double[] vectorC;
     private int num_clas;
+    private double distancia;
     public Patron(int n) {
         this.clase = "";
         this.claseResultante = "";
@@ -92,6 +93,14 @@ public class Patron {
 
     public void setNum_clas(int num_clas) {
         this.num_clas = num_clas;
+    }
+
+    public double getDistancia() {
+        return distancia;
+    }
+
+    public void setDistancia(double distancia) {
+        this.distancia = distancia;
     }
     
     
