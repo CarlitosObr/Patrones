@@ -17,6 +17,6 @@ public interface ClasificadorSupervisado {
     
     public abstract void entrenar(ArrayList<Patron> instancias);
     public abstract void clasificar(ArrayList<Patron> instancias,Patron nuevo);
-    public abstract double calculaEficiencia(ArrayList<Patron> instancias);
+    //public abstract double calculaEficiencia(ArrayList<Patron> instancias);
     
 }

@@ -12,7 +12,8 @@ import java.util.ArrayList;
  * @author carli
  */
 public class MinimaDistancia implements ClasificadorSupervisado{
-     public ArrayList<Patron> representativos;
+    public ArrayList<Patron> representativos;
+    public ArrayList<Patron> clasificados = new ArrayList();
      
     public MinimaDistancia() {
         this.representativos = new ArrayList<>();
@@ -49,8 +50,7 @@ public class MinimaDistancia implements ClasificadorSupervisado{
                 }
             }   
         }
-        
-        
+          
     }
 
     @Override
@@ -66,9 +66,10 @@ public class MinimaDistancia implements ClasificadorSupervisado{
             }
         }
        comp.setClaseResultante(representativos.get(n).getClase());
+       clasificados.add(comp);
     }
 
-    @Override
+    
     public double calculaEficiencia(ArrayList<Patron> instancias) {
         double n=0;
         double elementos = 0;
@@ -79,8 +80,18 @@ public class MinimaDistancia implements ClasificadorSupervisado{
             }
         }
         System.out.println("Correctos: "+n);
-        System.out.println("Incorrectos: "+(instancias.size()-n-representativos.size()));
-        eficacia = (100*n)/(instancias.size()-representativos.size());
+        System.out.println("Incorrectos: "+(instancias.size()-n));
+        eficacia = (100*n)/(instancias.size());
         return eficacia;
     }
+
+    public ArrayList<Patron> getClasificados() {
+        return clasificados;
+    }
+
+    public void setClasificados(ArrayList<Patron> clasificados) {
+        this.clasificados = clasificados;
+    }
+    
+    
 }

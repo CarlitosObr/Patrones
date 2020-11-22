@@ -18,6 +18,7 @@ public class KNN implements ClasificadorSupervisado{
     public final int k;
     public ArrayList<Patron> representativos = new ArrayList();
     public ArrayList<Patron> entrenado = new ArrayList();
+    public ArrayList<Patron> clasificado = new ArrayList();
     calculaDistancias cd = new calculaDistancias();
     public KNN(int k){
         this.k = k;
@@ -63,6 +64,7 @@ public class KNN implements ClasificadorSupervisado{
                      //System.out.println("Cuenta: "+contador[j]+ "Clase: "+representativos.get(j).getClase());
                      if(contador[j]==k){
                         nuevo.setClaseResultante(entrenado.get(i).getClase());
+                        clasificado.add(nuevo);
                          //System.out.println("Cuenta: "+contador[j]+ "Clase: "+representativos.get(j).getClase());
                          //exit(0);
                         return;
@@ -72,7 +74,7 @@ public class KNN implements ClasificadorSupervisado{
         }
     }
 
-    @Override
+    
     public double calculaEficiencia(ArrayList<Patron> instancias) {
         double n=0;
         double elementos = 0;
@@ -91,5 +93,16 @@ public class KNN implements ClasificadorSupervisado{
     public int getK() {
         return k;
     }
+
+    public ArrayList<Patron> getClasificado() {
+        return clasificado;
+    }
+
+    public void setClasificado(ArrayList<Patron> clasificado) {
+        this.clasificado = clasificado;
+    }
+
+    
+    
     
 }
