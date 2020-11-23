@@ -102,6 +102,14 @@ public class KNN implements ClasificadorSupervisado{
         this.clasificado = clasificado;
     }
 
+    public ArrayList<Patron> getRepresentativos() {
+        return representativos;
+    }
+
+    public void setRepresentativos(ArrayList<Patron> representativos) {
+        this.representativos = representativos;
+    }
+
     
     
     

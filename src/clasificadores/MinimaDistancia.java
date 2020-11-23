@@ -92,6 +92,14 @@ public class MinimaDistancia implements ClasificadorSupervisado{
     public void setClasificados(ArrayList<Patron> clasificados) {
         this.clasificados = clasificados;
     }
+
+    public ArrayList<Patron> getRepresentativos() {
+        return representativos;
+    }
+
+    public void setRepresentativos(ArrayList<Patron> representativos) {
+        this.representativos = representativos;
+    }
     
     
 }

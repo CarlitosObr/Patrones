@@ -9,6 +9,7 @@ import clasificadores.KNN;
 import clasificadores.MinimaDistancia;
 import data.Patron;
 import data.LeerDatos;
+import data.Matriz;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -34,14 +35,15 @@ public class RP2021A {
         ArrayList<Patron> patrones = LeerDatos.tokenizarDataSet();
         ArrayList<Patron> clasificadoMD;
         ArrayList<Patron> clasificadoKNN;
+        Matriz nueva;
         System.out.println(patrones.size());
         MinimaDistancia mn = new MinimaDistancia();
-        KNN knn = new KNN(10);
-        knn.entrenar(patrones);
+        KNN knn = new KNN(5);
+        //knn.entrenar(patrones);
         mn.entrenar(patrones);
         
              
-        for(int x = 0; x < 15; x++){
+        /*for(int x = 0; x < 15; x++){
               knn.clasificar(patrones, patrones.get(x));
         }
         for(int x = 30; x < 45; x++){
@@ -49,6 +51,9 @@ public class RP2021A {
         }
         for(int x = 63; x < 78; x++){
               knn.clasificar(patrones, patrones.get(x));
+        }*/
+        for(int i=0;i<patrones.size()-mn.getRepresentativos().size();i++){
+            mn.clasificar(patrones, patrones.get(i));
         }
         /*for(int x = 0; x < 15; x++){
               knn.clasificar(patrones, patrones.get(x));
@@ -59,8 +64,8 @@ public class RP2021A {
         for(int x = 100; x < 115; x++){
               knn.clasificar(patrones, patrones.get(x));
         }*/
-         clasificadoKNN = knn.getClasificado();
-        
+         clasificadoKNN = mn.getClasificados();
+        //clasificadoMD = mn.getClasificados();
        /* for(int x = 0; x < patrones.size(); x++){
               knn.clasificar(patrones, patrones.get(x));
         }
@@ -72,6 +77,10 @@ public class RP2021A {
         }
         System.out.println("La eficiencia con la que se clasifica es de "+mn.calculaEficiencia(clasificadoKNN));
         //System.out.println("La eficiencia con la que se clasifica es de "+knn.calculaEficiencia(clasificadoKNN));
+        
+         nueva = new Matriz(clasificadoKNN);
+         nueva.toString();
+         nueva.crearMatriz(mn.getRepresentativos());
     }
     
 }
