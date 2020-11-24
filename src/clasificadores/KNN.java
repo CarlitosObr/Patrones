@@ -10,6 +10,8 @@ import interfaces.ClasificadorSupervisado;
 import java.util.ArrayList;
 import data.calculaDistancias;
 import static java.lang.System.exit;
+import java.util.HashMap;
+import java.util.Iterator;
 /**
  *
  * @author carli
@@ -26,21 +28,21 @@ public class KNN implements ClasificadorSupervisado{
     
     @Override
     public void entrenar(ArrayList<Patron> instancias) {
-        int cont;
-        int clases=1;
-        int clase = 1;
-        int claseComp;
+        int con=0;
+        HashMap<Integer,String> entrenador = new HashMap();
+        double[] vector = new double[instancias.get(0).getVectorC().length];
     // instancias = representativos;
-        representativos.add(instancias.get(0));
         for(int x=0; x<instancias.size();x++){
-          claseComp = clase;
-          clase = instancias.get(x).getNum_clas();
-          //representativos.add(instancias.get(x));
-            if(clase != claseComp){    
-                clases++;
-                representativos.add(instancias.get(x));
-            }  
+            if(!entrenador.containsValue(instancias.get(x).getClase())){
+                entrenador.put(con, instancias.get(x).getClase());
+                con++;
+            } 
         }
+        Iterator<Integer> iterador = entrenador.keySet().iterator();
+        while(iterador.hasNext()){
+            Integer llave = iterador.next();
+            representativos.add(new Patron(vector,entrenador.get(llave)));
+        }         
         for(int i=0; i<instancias.size();i++){
             entrenado.add(new Patron(0,instancias.get(i).getClase(),instancias.get(i).getVectorC()));
         }

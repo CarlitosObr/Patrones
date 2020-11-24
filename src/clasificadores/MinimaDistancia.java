@@ -7,6 +7,8 @@ package clasificadores;
 import data.Patron;
 import interfaces.ClasificadorSupervisado;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 /**
  *
  * @author carli
@@ -21,38 +23,43 @@ public class MinimaDistancia implements ClasificadorSupervisado{
     /*public MinimaDistancia(ArrayList<Patron> representativos) {
         this.representativos = representativos;
     }*/
-           
     @Override
     public void entrenar(ArrayList<Patron> instancias) {
       // calcular los representativos
+     HashMap<Integer,String> entrenador = new HashMap();
      int prom=0;
-     int clase = 1;
-     int claseComp;
      int n;
+     int con = 1;
     // instancias = representativos;
-     double[] vector = new double[instancias.get(0).getVectorC().length];
+        double[] vector = new double[instancias.get(0).getVectorC().length];
         for(int x=0; x<instancias.size();x++){
-          claseComp = clase;
-          clase = instancias.get(x).getNum_clas();
-            if(clase != claseComp){
+            if(!entrenador.containsValue(instancias.get(x).getClase())){
+                entrenador.put(con, instancias.get(x).getClase());
+                con++;
+            } 
+        }
+        Iterator<Integer> iterador = entrenador.keySet().iterator();
+        while(iterador.hasNext()){
+            Integer llave = iterador.next();
+            for(int x=0; x<instancias.size();x++){
+                if(entrenador.get(llave).equals(instancias.get(x).getClase())){
+                    prom++;
+                    for(int y=0; y<vector.length;y++){
+                        vector[y]+=instancias.get(x).getVectorC()[y];
+                        
+                    }
+                }
+            }
                 for(int j = 0; j<vector.length; j++){
                     vector[j] = vector[j]/prom; 
                 }
-                instancias.add(new Patron(vector,instancias.get(x-1).getClase()));
-                //instancias = representativos;
-                representativos.add(new Patron(vector,instancias.get(x-1).getClase()));
-                vector = new double[instancias.get(x).getVectorC().length];
+                representativos.add(new Patron(vector,entrenador.get(llave)));
+                vector = new double[instancias.get(0).getVectorC().length];
                 prom = 0;
-            }else{
-                prom++;
-                for(int y=0; y<vector.length;y++){
-                vector[y]+=instancias.get(x).getVectorC()[y];
-                }
-            }   
-        }
-          
-    }
-
+        }             
+ }
+       
+    
     @Override
     public void clasificar(ArrayList<Patron> instancias, Patron comp) {
        // clasificar las instancias

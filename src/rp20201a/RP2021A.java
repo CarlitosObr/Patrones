@@ -39,10 +39,16 @@ public class RP2021A {
         System.out.println(patrones.size());
         MinimaDistancia mn = new MinimaDistancia();
         KNN knn = new KNN(5);
-        //knn.entrenar(patrones);
-        mn.entrenar(patrones);
-        
-             
+        knn.entrenar(patrones);
+        //mn.entrenar(patrones);
+        /*for(int i = 0; i<mn.getRepresentativos().size();i++){
+            System.out.println(mn.getRepresentativos().get(i).getClase());
+        }
+        for(int i = 0; i<mn.getRepresentativos().size();i++){
+           for(int j = 0 ; j<mn.getRepresentativos().get(i).getVectorC().length;j++){
+               System.out.println(j+1+". "+mn.getRepresentativos().get(i).getVectorC()[j]);
+           }  
+        }  */  
         /*for(int x = 0; x < 15; x++){
               knn.clasificar(patrones, patrones.get(x));
         }
@@ -52,8 +58,8 @@ public class RP2021A {
         for(int x = 63; x < 78; x++){
               knn.clasificar(patrones, patrones.get(x));
         }*/
-        for(int i=0;i<patrones.size()-mn.getRepresentativos().size();i++){
-            mn.clasificar(patrones, patrones.get(i));
+        for(int i=0;i<patrones.size();i++){
+            knn.clasificar(patrones, patrones.get(i));
         }
         /*for(int x = 0; x < 15; x++){
               knn.clasificar(patrones, patrones.get(x));
@@ -64,7 +70,7 @@ public class RP2021A {
         for(int x = 100; x < 115; x++){
               knn.clasificar(patrones, patrones.get(x));
         }*/
-         clasificadoKNN = mn.getClasificados();
+         clasificadoKNN = knn.getClasificado();
         //clasificadoMD = mn.getClasificados();
        /* for(int x = 0; x < patrones.size(); x++){
               knn.clasificar(patrones, patrones.get(x));
@@ -75,12 +81,12 @@ public class RP2021A {
         for(int x = 0; x < clasificadoKNN.size(); x++){
              System.out.println("Indice: "+x+" Clase: "+clasificadoKNN.get(x).getClase()+" ClaseResultante: "+clasificadoKNN.get(x).getClaseResultante());
         }
-        System.out.println("La eficiencia con la que se clasifica es de "+mn.calculaEficiencia(clasificadoKNN));
+        System.out.println("La eficiencia con la que se clasifica es de "+knn.calculaEficiencia(clasificadoKNN));
         //System.out.println("La eficiencia con la que se clasifica es de "+knn.calculaEficiencia(clasificadoKNN));
         
          nueva = new Matriz(clasificadoKNN);
          nueva.toString();
-         nueva.crearMatriz(mn.getRepresentativos());
+         nueva.crearMatriz(knn.getRepresentativos());
     }
     
 }
