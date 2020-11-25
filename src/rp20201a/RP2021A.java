@@ -5,6 +5,7 @@
  */
 package rp20201a;
 
+import clasificadores.Bayes;
 import clasificadores.KNN;
 import clasificadores.MinimaDistancia;
 import data.Patron;
@@ -32,14 +33,52 @@ public class RP2021A {
         (1,2) (6.7,7.8)  d2:
         * 5.1,3.5,1.4,0.2
         **/ 
+        double[] n = {6,180,12};
         ArrayList<Patron> patrones = LeerDatos.tokenizarDataSet();
+        //ArrayList<Patron> patrones = new ArrayList();
         ArrayList<Patron> clasificadoMD;
         ArrayList<Patron> clasificadoKNN;
         Matriz nueva;
         System.out.println(patrones.size());
-        MinimaDistancia mn = new MinimaDistancia();
-        KNN knn = new KNN(5);
-        knn.entrenar(patrones);
+        //MinimaDistancia mn = new MinimaDistancia();
+        Bayes b = new Bayes();
+        
+        b.entrenar(patrones);
+        
+        /*for (int i = 0; i<b.varianza.size();i++){
+            System.out.println(b.varianza.get(i).getClase());
+           for(int j=0; j<b.varianza.get(i).getVectorC().length;j++){
+               System.out.println(b.varianza.get(i).getVectorC()[j]);
+           }
+           
+        }
+        for (int i = 0; i<b.desviacion.size();i++){
+            System.out.println(b.desviacion.get(i).getClase());
+           for(int j=0; j<b.desviacion.get(i).getVectorC().length;j++){
+               System.out.println(b.desviacion.get(i).getVectorC()[j]);
+           }
+           
+        }
+        b.clasificar(patrones, new Patron(n,""));
+        
+        for (int i = 0; i<b.dist.size();i++){
+            System.out.println(b.dist.get(i).getClase());
+           for(int j=0; j<b.dist.get(i).getVectorC().length;j++){
+               System.out.println(b.dist.get(i).getVectorC()[j]);
+           }
+           
+        }
+        
+        System.out.println(b.evidencia);
+        for (int i = 0; i<b.posteriori.size();i++){
+            System.out.println(b.posteriori.get(i).getClase());
+           for(int j=0; j<b.posteriori.get(i).getVectorC().length;j++){
+               System.out.println(b.posteriori.get(i).getVectorC()[j]);
+           }
+           
+        }*/
+        //KNN knn = new KNN(5);
+        //knn.entrenar(patrones);
         //mn.entrenar(patrones);
         /*for(int i = 0; i<mn.getRepresentativos().size();i++){
             System.out.println(mn.getRepresentativos().get(i).getClase());
@@ -59,7 +98,7 @@ public class RP2021A {
               knn.clasificar(patrones, patrones.get(x));
         }*/
         for(int i=0;i<patrones.size();i++){
-            knn.clasificar(patrones, patrones.get(i));
+            b.clasificar(patrones, patrones.get(i));
         }
         /*for(int x = 0; x < 15; x++){
               knn.clasificar(patrones, patrones.get(x));
@@ -70,7 +109,7 @@ public class RP2021A {
         for(int x = 100; x < 115; x++){
               knn.clasificar(patrones, patrones.get(x));
         }*/
-         clasificadoKNN = knn.getClasificado();
+         clasificadoKNN = b.getClasificados();
         //clasificadoMD = mn.getClasificados();
        /* for(int x = 0; x < patrones.size(); x++){
               knn.clasificar(patrones, patrones.get(x));
@@ -81,12 +120,12 @@ public class RP2021A {
         for(int x = 0; x < clasificadoKNN.size(); x++){
              System.out.println("Indice: "+x+" Clase: "+clasificadoKNN.get(x).getClase()+" ClaseResultante: "+clasificadoKNN.get(x).getClaseResultante());
         }
-        System.out.println("La eficiencia con la que se clasifica es de "+knn.calculaEficiencia(clasificadoKNN));
+        System.out.println("La eficiencia con la que se clasifica es de "+b.calculaEficiencia(clasificadoKNN));
         //System.out.println("La eficiencia con la que se clasifica es de "+knn.calculaEficiencia(clasificadoKNN));
         
          nueva = new Matriz(clasificadoKNN);
          nueva.toString();
-         nueva.crearMatriz(knn.getRepresentativos());
+         nueva.crearMatriz(b.posteriori);
     }
     
 }
