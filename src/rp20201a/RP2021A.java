@@ -75,8 +75,9 @@ public class RP2021A {
            for(int j=0; j<b.posteriori.get(i).getVectorC().length;j++){
                System.out.println(b.posteriori.get(i).getVectorC()[j]);
            }
-           
+          
         }*/
+       
         //KNN knn = new KNN(5);
         //knn.entrenar(patrones);
         //mn.entrenar(patrones);
@@ -97,8 +98,9 @@ public class RP2021A {
         for(int x = 63; x < 78; x++){
               knn.clasificar(patrones, patrones.get(x));
         }*/
+        System.out.println(b.evidencia);
         for(int i=0;i<patrones.size();i++){
-            b.clasificar(patrones, patrones.get(i));
+           b.clasificar(patrones, patrones.get(i));
         }
         /*for(int x = 0; x < 15; x++){
               knn.clasificar(patrones, patrones.get(x));

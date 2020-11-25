@@ -178,11 +178,11 @@ public class Medidas {
         Iterator<Integer> iterador = entrenador.keySet().iterator();
         while(iterador.hasNext()){
             Integer llave = iterador.next();
-            prom+=priori.get(con).getVectorC()[0];
+            vector[0]+=priori.get(con).getVectorC()[0];
             for(int x=0; x<distNorm.size();x++){
                 if(entrenador.get(llave).equals(distNorm.get(x).getClase())){
                     for(int y=0; y<distNorm.get(x).getVectorC().length;y++){
-                        vector[0] = prom*distNorm.get(x).getVectorC()[y];  
+                        vector[0] *= distNorm.get(x).getVectorC()[y];  
                     }
                 }
             }
