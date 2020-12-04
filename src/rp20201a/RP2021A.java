@@ -8,6 +8,7 @@ package rp20201a;
 import clasificadores.Bayes;
 import clasificadores.KNN;
 import clasificadores.MinimaDistancia;
+import clasificadoresNoSupervisados.cmeans;
 import data.Patron;
 import data.LeerDatos;
 import data.Matriz;
@@ -35,16 +36,35 @@ public class RP2021A {
         **/ 
         double[] n = {6,180,12};
         ArrayList<Patron> patrones = LeerDatos.tokenizarDataSet();
+        cmeans cm = new cmeans(3);
+        cm.entrenar(patrones);
+        cm.clasificar();
+       
+        cm.getRepresentativos();
+       
         //ArrayList<Patron> patrones = new ArrayList();
         ArrayList<Patron> clasificadoMD;
-        ArrayList<Patron> clasificadoKNN;
-        Matriz nueva;
-        System.out.println(patrones.size());
+      //  ArrayList<Patron> clasificadoKNN;
+       // Matriz nueva;
+       // Matriz nueva2;
+      //  System.out.println(patrones.size());
         //MinimaDistancia mn = new MinimaDistancia();
-        Bayes b = new Bayes();
+        for(int i = 0; i<patrones.size(); i++){
+            System.out.println("Clase: "+patrones.get(i).getClase()+" Clase Resultante: "+patrones.get(i).getClaseResultante());
+        }
         
-        b.entrenar(patrones);
-        
+        //Bayes b = new Bayes();
+        //KNN knn = new KNN(10);
+      //  b.entrenar(patrones);
+        //b.entrenar(patrones);
+        //knn.entrenar(patrones);
+        /*for (int i = 0; i<b.desviacion.size();i++){
+            System.out.println(b.desviacion.get(i).getClase());
+           for(int j=0; j<b.desviacion.get(i).getVectorC().length;j++){
+               System.out.println(b.desviacion.get(i).getVectorC()[j]);
+           }
+           
+        }*/
         /*for (int i = 0; i<b.varianza.size();i++){
             System.out.println(b.varianza.get(i).getClase());
            for(int j=0; j<b.varianza.get(i).getVectorC().length;j++){
@@ -98,10 +118,13 @@ public class RP2021A {
         for(int x = 63; x < 78; x++){
               knn.clasificar(patrones, patrones.get(x));
         }*/
-        System.out.println(b.evidencia);
-        for(int i=0;i<patrones.size();i++){
-           b.clasificar(patrones, patrones.get(i));
-        }
+        //System.out.println(b.evidencia);
+      //  for(int i=0;i<patrones.size();i++){
+      //     b.clasificar(patrones, patrones.get(i));
+       // }
+       /* for(int i=0;i<patrones.size();i++){
+           mn.clasificar(patrones, patrones.get(i));
+        }*/
         /*for(int x = 0; x < 15; x++){
               knn.clasificar(patrones, patrones.get(x));
         }
@@ -111,23 +134,26 @@ public class RP2021A {
         for(int x = 100; x < 115; x++){
               knn.clasificar(patrones, patrones.get(x));
         }*/
-         clasificadoKNN = b.getClasificados();
-        //clasificadoMD = mn.getClasificados();
+        
+   //      clasificadoKNN = b.getClasificados();
+       // clasificadoMD = mn.getClasificados();
        /* for(int x = 0; x < patrones.size(); x++){
               knn.clasificar(patrones, patrones.get(x));
         }
         clasificadoKNN = knn.getClasificado();*/
        
         
-        for(int x = 0; x < clasificadoKNN.size(); x++){
+        /*for(int x = 0; x < clasificadoKNN.size(); x++){
              System.out.println("Indice: "+x+" Clase: "+clasificadoKNN.get(x).getClase()+" ClaseResultante: "+clasificadoKNN.get(x).getClaseResultante());
-        }
-        System.out.println("La eficiencia con la que se clasifica es de "+b.calculaEficiencia(clasificadoKNN));
+        }*/
+      //  System.out.println("La eficiencia con la que se clasifica es de "+b.calculaEficiencia(clasificadoKNN));
+        //System.out.println("La eficiencia con la que se clasifica es de "+b.calculaEficiencia(clasificadoMD));
         //System.out.println("La eficiencia con la que se clasifica es de "+knn.calculaEficiencia(clasificadoKNN));
         
-         nueva = new Matriz(clasificadoKNN);
-         nueva.toString();
-         nueva.crearMatriz(b.posteriori);
+       //  nueva = new Matriz(clasificadoKNN);
+        // nueva.toString();
+        /// nueva.crearMatriz(b.priori);
+         
     }
     
 }
