@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package clasificadoresNoSupervisados;
+package clusterimagenes;
 
 import data.Patron;
 import interfaces.ClasificadorNoSupervisado;
@@ -17,31 +17,32 @@ import java.util.Random;
  *
  * @author carli
  */
-public class cmeans implements ClasificadorNoSupervisado{
+public class cmeansImagen{
     private int c;
-    private ArrayList<Patron> representativos = new ArrayList();
-    private ArrayList<Patron> patrones;   
+    private ArrayList<PatronImagen> representativos = new ArrayList();
+    private ArrayList<PatronImagen> patrones;   
             
-    public cmeans(int c) {
+    public cmeansImagen(int c) {
         this.c = c;
     }
     
-    @Override
-    public void entrenar(ArrayList<Patron> instancias) {
-        this.patrones = instancias;
+    
+    public void entrenar(ArrayList<PatronImagen> instancias) {
+        this.patrones = (ArrayList<PatronImagen>) instancias.clone();
     }
 
-    @Override
     public void clasificar() {
-       ArrayList<Patron> comparar;
-       ArrayList<Patron> comparar2;
+       ArrayList<PatronImagen> comparar;
+       ArrayList<PatronImagen> comparar2;
        double distancia = 1;
        double comparacion;
        double com;
+       int contador=0;
        generarRepresentativosIn();
        
        asignarClase(this.representativos);
        while(distancia!=0){
+                System.out.println(contador++);
                 comparacion=0;
                 com = 0;
                 comparar = this.representativos;
@@ -58,8 +59,9 @@ public class cmeans implements ClasificadorNoSupervisado{
                     }  
                 }
                 
-                this.representativos = (ArrayList<Patron>) comparar2.clone();
+                this.representativos = (ArrayList<PatronImagen>) comparar2.clone();
                 distancia = Math.abs(comparacion - com);   
+                
         }
     }
 
@@ -71,28 +73,28 @@ public class cmeans implements ClasificadorNoSupervisado{
         while(this.c!=0){
             if(!buscaPatron(patrones.get(aux))){
                 aux = ran.nextInt(this.patrones.size());
-                this.representativos.add(patrones.get(aux));
+                this.representativos.add(new PatronImagen(0,0,patrones.get(aux).getVectorC()));
                 this.c--;
             }
         }
         
     }
 
-    public ArrayList<Patron> getRepresentativos() {
+    public ArrayList<PatronImagen> getRepresentativos() {
         return representativos;
     }
 
-    private ArrayList<Patron> encontrarNuevoRepresentativo() {
+    private ArrayList<PatronImagen> encontrarNuevoRepresentativo() {
         
-        ArrayList<Patron> nuevo = new ArrayList();
+        ArrayList<PatronImagen> nuevo = new ArrayList();
         HashMap<Integer,String> entrenador = new HashMap();
          int prom=0;
          int n1;
          int con = 1;
         double[] vector = new double[this.patrones.get(0).getVectorC().length];
         for(int x=0; x<this.patrones.size();x++){
-            if(!entrenador.containsValue(this.patrones.get(x).getClaseResultante())){
-                entrenador.put(con, this.patrones.get(x).getClaseResultante());
+            if(!entrenador.containsValue(this.patrones.get(x).getClase())){
+                entrenador.put(con, this.patrones.get(x).getClase());
                 con++;
             } 
         }
@@ -100,7 +102,7 @@ public class cmeans implements ClasificadorNoSupervisado{
         while(iterador.hasNext()){
             Integer llave = iterador.next();
             for(int x=0; x<this.patrones.size();x++){
-                if(entrenador.get(llave).equals(this.patrones.get(x).getClaseResultante())){
+                if(entrenador.get(llave).equals(this.patrones.get(x).getClase())){
                     prom++;
                     for(int y=0; y<vector.length;y++){
                         vector[y]+=this.patrones.get(x).getVectorC()[y];
@@ -111,7 +113,7 @@ public class cmeans implements ClasificadorNoSupervisado{
                 for(int j = 0; j<vector.length; j++){
                     vector[j] = vector[j]/prom; 
                 }
-                nuevo.add(new Patron(vector,entrenador.get(llave)));
+                nuevo.add(new PatronImagen(0,0,vector));
                
                 vector = new double[this.patrones.get(0).getVectorC().length];
                 prom = 0;
@@ -119,7 +121,8 @@ public class cmeans implements ClasificadorNoSupervisado{
         return nuevo;
     }
      
-    private void asignarClase(ArrayList<Patron> instancias) {
+    private void asignarClase(ArrayList<PatronImagen> instancias) {
+        
         for(int i = 0; i<patrones.size(); i++){
         double menor =  instancias.get(0).calcularDistancia(patrones.get(i));
         int n = 0;
@@ -130,17 +133,22 @@ public class cmeans implements ClasificadorNoSupervisado{
             n = k;
             }
         }
-       patrones.get(i).setClaseResultante("Clase "+(n+1));
+      
+       patrones.get(i).setClase(instancias.get(n).getClase());
        }
     }
 
-    private boolean buscaPatron(Patron aux) {
+    private boolean buscaPatron(PatronImagen aux) {
         for(int i=0; i<this.representativos.size(); i++){
             if(this.representativos.get(i).getVectorC().equals(aux)){
                 return true;
             }
         }
         return false;
+    }
+
+    public ArrayList<PatronImagen> getPatrones() {
+        return patrones;
     }
     
     

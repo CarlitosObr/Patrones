@@ -9,6 +9,7 @@ import clasificadores.Bayes;
 import clasificadores.KNN;
 import clasificadores.MinimaDistancia;
 import clasificadoresNoSupervisados.cmeans;
+import clusterimagenes.generarPatrones;
 import data.Patron;
 import data.LeerDatos;
 import data.Matriz;
@@ -34,24 +35,28 @@ public class RP2021A {
         (1,2) (6.7,7.8)  d2:
         * 5.1,3.5,1.4,0.2
         **/ 
-        double[] n = {6,180,12};
-        ArrayList<Patron> patrones = LeerDatos.tokenizarDataSet();
-        cmeans cm = new cmeans(3);
-        cm.entrenar(patrones);
-        cm.clasificar();
+        
+        generarPatrones nuevo = new generarPatrones();
+        nuevo.abrir();
+        nuevo.clusterizar(10);
+       // double[] n = {6,180,12};
+      //  ArrayList<Patron> patrones = LeerDatos.tokenizarDataSet();
+      //  cmeans cm = new cmeans(3);
+      //  cm.entrenar(patrones);
+       // cm.clasificar();
        
-        cm.getRepresentativos();
+      //  cm.getRepresentativos();
        
         //ArrayList<Patron> patrones = new ArrayList();
-        ArrayList<Patron> clasificadoMD;
+      //  ArrayList<Patron> clasificadoMD;
       //  ArrayList<Patron> clasificadoKNN;
        // Matriz nueva;
        // Matriz nueva2;
       //  System.out.println(patrones.size());
         //MinimaDistancia mn = new MinimaDistancia();
-        for(int i = 0; i<patrones.size(); i++){
-            System.out.println("Clase: "+patrones.get(i).getClase()+" Clase Resultante: "+patrones.get(i).getClaseResultante());
-        }
+       // for(int i = 0; i<patrones.size(); i++){
+       //     System.out.println("Patrón "+i+" Clase Resultante: "+patrones.get(i).getClaseResultante());
+       // }
         
         //Bayes b = new Bayes();
         //KNN knn = new KNN(10);
