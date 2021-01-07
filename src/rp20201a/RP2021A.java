@@ -8,6 +8,7 @@ package rp20201a;
 import clasificadores.Bayes;
 import clasificadores.KNN;
 import clasificadores.MinimaDistancia;
+import clasificadoresNoSupervisados.Min_Max;
 import clasificadoresNoSupervisados.cmeans;
 import clusterimagenes.generarPatrones;
 import data.Patron;
@@ -35,10 +36,17 @@ public class RP2021A {
         (1,2) (6.7,7.8)  d2:
         * 5.1,3.5,1.4,0.2
         **/ 
-        
-        generarPatrones nuevo = new generarPatrones();
+        ArrayList<Patron> patrones = LeerDatos.tokenizarDataSet();
+        Min_Max mm = new Min_Max(patrones,5);
+        mm.clasifica();
+       /* generarPatrones nuevo = new generarPatrones();
         nuevo.abrir();
-        nuevo.clusterizar(10);
+        nuevo.clusterizar(5);
+        nuevo.clusterizar(15);
+        nuevo.clusterizar(75);
+        nuevo.clusterizar(100);
+        nuevo.clusterizar(180);
+        nuevo.clusterizar(220);*/
        // double[] n = {6,180,12};
       //  ArrayList<Patron> patrones = LeerDatos.tokenizarDataSet();
       //  cmeans cm = new cmeans(3);

@@ -40,7 +40,13 @@ public class Patron {
         this.clase = clase;
         this.vectorC = vectorC;
     }
-   
+    public Patron(Patron patron) {
+        this.vectorC = patron.getVectorC().clone();
+        this.clase = patron.getClase();
+        /*this.x = patron.getX();
+        this.y = patron.getY();*/
+        
+    }
     // distancia euclidiana
     public double calcularDistancia (Patron aux){
         double sumatoria = 0;
