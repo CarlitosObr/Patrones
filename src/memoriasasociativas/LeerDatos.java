@@ -4,7 +4,8 @@
  * and open the template in the editor.
  */
 package memoriasasociativas;
-import data.*;
+
+import pruebas.*;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -19,14 +20,14 @@ import javax.swing.JOptionPane;
  *
  * @author working
  */
-public class LeerPatrones {
+public class LeerDatos {
     
-    public static ArrayList<PatronesBinarios> tokenizarDataSet() throws IOException{
+    public static ArrayList<Patron> tokenizarDataSet() throws IOException{
     // ventana para abrir el txt
     
      String texto, aux;
      LinkedList<String> lista = new LinkedList();
-     ArrayList<PatronesBinarios> articulos = new ArrayList<>();
+     ArrayList<Patron> patrones = new ArrayList<>();
         try {
             //llamamos el metodo que permite cargar la ventana
             JFileChooser file = new JFileChooser();
@@ -46,9 +47,11 @@ public class LeerPatrones {
                 }
                 lee.close();
                 //System.out.println(lista.size());
-                
+
                 ArrayList<String> lista2 = new ArrayList<>();
                 String clase = "";
+                String claseComp="";
+                int n = 0;
                 for (int i = 0; i < lista.size(); i++) {
                     StringTokenizer st = new StringTokenizer(lista.get(i), ",");
 
@@ -56,13 +59,21 @@ public class LeerPatrones {
                         lista2.add(st.nextToken());
                     }
 
-                    int[] vector = new int[lista2.size()];
+                    double[] vector = new double[lista2.size() - 1];
 
-                    for (int x = 0; x < lista2.size(); x++) {
-                        vector[x] = Integer.parseInt(lista2.get(x));
+                    for (int x = 0; x < lista2.size() - 1; x++) {
+                        vector[x] = Double.parseDouble(lista2.get(x));
                     }
-                    clase = lista2.get(lista2.size()-1);
-                    articulos.add(new PatronesBinarios(vector));
+                   
+                    
+                        claseComp = clase;
+                        clase = lista2.get(lista2.size()-1);
+                        if(!clase.equals(claseComp)){
+                           n++;
+                           patrones.add(new Patron(vector,clase));
+                        }else{
+                           patrones.add(new Patron(vector,clase));
+                        }
                      
                     lista2.clear();
                 }
@@ -75,7 +86,7 @@ public class LeerPatrones {
             return null;
         }
        
-        return articulos;
+        return patrones;
     }
     
 }
