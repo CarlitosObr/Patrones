@@ -17,8 +17,6 @@ import java.util.Iterator;
 public class CAP {
     public ArrayList<PatronesBinarios> iniciales;
     public ArrayList<PatronesBinarios> Promedios = new ArrayList<>();
-    public ArrayList<PatronesBinarios> Y = new ArrayList<>();
-    public ArrayList<PatronesBinarios> salidaY = new ArrayList<>();
     HashMap<Integer,String> entrenador = new HashMap();
     public PatronesBinarios medio;
     public double[][] C;
@@ -26,9 +24,7 @@ public class CAP {
     
     public CAP(ArrayList<PatronesBinarios> iniciales){
         this.iniciales = (ArrayList<PatronesBinarios>) iniciales.clone();
-       // asignarVectorporCeros();
        obtenerClasesExistentes();
-        //C = new double[this.Promedios.size()][this.Promedios.get(0).getVectorN().length];
     }
     
     public void aprendizaje(){   
@@ -43,9 +39,6 @@ public class CAP {
                  vector[i] += (C[i][j] * instancia.getVectorT()[j]);
              }
          }
-         /*for(int i = 0; i< entrenador.size(); i++){
-             System.out.println("Vector "+i+": "+ vector[i]);
-         }*/
          instancia.setClaseResultante(obtenerClaseResultante(vector));
     }
 
@@ -59,12 +52,7 @@ public class CAP {
     }
 
     private void obtenerClasesExistentes() {
-       
-        //int prom=0;
-        //int n;
         int con = 1;
-       // int vamos = 0;
-       // instancias = representativos;
            double[] vector = new double[this.iniciales.get(0).getVectorN().length];
            for(int x=0; x<this.iniciales.size();x++){
                if(!entrenador.containsValue(this.iniciales.get(x).getClase())){
@@ -72,19 +60,6 @@ public class CAP {
                    con++;
                } 
            }
-           /*Iterator<Integer> iterador = entrenador.keySet().iterator();
-           int[] vectorBin;
-           while(iterador.hasNext()){
-               vectorBin = new int[con-1];
-               Integer llave = iterador.next();
-               vectorBin[vamos] = 1;
-               for(int x=0; x<this.iniciales.size();x++){
-                   if(entrenador.get(llave).equals(this.iniciales.get(x).getClase())){
-                       this.iniciales.get(x).setVectorBin(vectorBin);
-                   }
-               }
-               vamos++;
-           } */ 
              
     }
 

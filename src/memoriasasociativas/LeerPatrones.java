@@ -56,13 +56,13 @@ public class LeerPatrones {
                         lista2.add(st.nextToken());
                     }
 
-                    int[] vector = new int[lista2.size()];
+                    double[] vector = new double[lista2.size()-1];
 
-                    for (int x = 0; x < lista2.size(); x++) {
-                        vector[x] = Integer.parseInt(lista2.get(x));
+                    for (int x = 0; x < lista2.size()-1; x++) {
+                        vector[x] = Double.parseDouble(lista2.get(x));
                     }
                     clase = lista2.get(lista2.size()-1);
-                    articulos.add(new PatronesBinarios(vector));
+                    articulos.add(new PatronesBinarios(vector,clase));
                      
                     lista2.clear();
                 }
