@@ -16,7 +16,6 @@ import java.util.Iterator;
  */
 public class CAP {
     public ArrayList<PatronesBinarios> iniciales;
-    public ArrayList<PatronesBinarios> Promedios = new ArrayList<>();
     HashMap<Integer,String> entrenador = new HashMap();
     public PatronesBinarios medio;
     public double[][] C;
@@ -130,8 +129,6 @@ public class CAP {
             }
         }  
         cr = entrenador.get(n+1);
-        //cr = "Clase "+n;
-        //System.out.println("El valor de n: "+n);
         return cr;
     }
     public double calculaEficiencia(ArrayList<PatronesBinarios> instancias) {

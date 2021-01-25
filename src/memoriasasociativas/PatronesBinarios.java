@@ -23,7 +23,9 @@ public class PatronesBinarios {
     public PatronesBinarios(int[] VectorP){
         this.VectorP = VectorP;
     }
-    
+    public PatronesBinarios(double[] VectorN){
+        this.VectorN = VectorN;
+    }
     public PatronesBinarios(double[] VectorN,String clase){
         this.VectorN = VectorN;
         this.clase = clase;
